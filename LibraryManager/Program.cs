@@ -58,13 +58,49 @@ void RemoveBook() {
 }
 
 void FindBook() {
-    Console.Write("검색할 책의 ID를 입력하세요: ");
-    int id = Convert.ToInt32(Console.ReadLine());
+    Console.Write("무엇으로 검색하시겠습니까?\n1. ID\n2. 제목\n3. 저자\n");
 
-    Book book = bookManager.FindBookById(id);
+    int bookOption = Convert.ToInt32(Console.ReadLine());
 
-    Console.WriteLine($"ID: {book.Id}, 제목: {book.Title}, 저자: {book.Author}");
+    switch(bookOption) {
+        case 1:
+            Console.WriteLine("검색할 책의 ID를 입력하세요.");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            Book findId = bookManager.FindBookById(id);
+
+            Console.WriteLine($"ID: {findId.Id}, 제목: {findId.Title}, 저자: {findId.Author}");
+            break;
+        case 2:
+            Console.WriteLine("검색할 책의 제목을 입력하세요.");
+            string title = Console.ReadLine();
+
+            Book findTitle = bookManager.FindBookByTitle(title);
+
+            Console.WriteLine($"ID: {findTitle.Id}, 제목: {findTitle.Title}, 저자: {findTitle.Author}");
+            break;
+        case 3:
+            Console.WriteLine("검색할 책의 저자를 입력하세요.");
+            string author = Console.ReadLine();
+
+            Book findAuthor = bookManager.FindBookByAuthor(author);
+
+            Console.WriteLine($"ID: {findAuthor.Id}, 제목: {findAuthor.Title}, 저자: {findAuthor.Author}");
+            break;
+        default:
+            Console.WriteLine("잘못된 선택입니다.");
+            break;
+    }
 }
+
+//void FindBook() {
+//    Console.Write("검색할 책의 ID를 입력하세요: ");
+//    int id = Convert.ToInt32(Console.ReadLine());
+
+//    Book book = bookManager.FindBookById(id);
+
+//    Console.WriteLine($"ID: {book.Id}, 제목: {book.Title}, 저자: {book.Author}");
+//}
 
 void DisplayAllBooks() {
     var books = bookManager.GetAllBooks();
